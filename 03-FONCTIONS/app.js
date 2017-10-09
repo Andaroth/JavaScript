@@ -1,18 +1,18 @@
-var minus = function(a, b) {
+function minus(a, b) {
     return (a-b);
 }
-var divide = function(a, b) {
+function divide(a, b) {
     return (a/b);
 }
-var multi = function(a, b) {
+function multi(a, b) {
     return (a*b);
 }
 
-var percent = function(a, b) {
+function percent(a, b) {
     return ((b/100)*a);
 }
 
-var speed = function(a,b) {
+function speed(a,b) {
     return (a/b)+"Km/h";
 }
 
