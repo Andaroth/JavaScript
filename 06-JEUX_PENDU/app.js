@@ -32,12 +32,16 @@ function guessLetter() {
     guess = guess.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
     console.log("< you typed "+guess);
     
+    /* 
+        Je vais créer une boucle qui va tester la saisie
+        Mais d'abord, je vais tester quelques exceptions, au cas où l'utilisateur fait des choses imprévues par la boucle. Ce fais cela grâce aux if et else if. 
+    */
     if (guess == motMystere) { // Si le joueur entre direct le mot recherché
         tryNumb++;
         console.log("GUESS RIGHT !!!");
         gameWin(); // C'est gagné :)
     }
-    if (guess.length != 1) { // Si l'utilisateur n'a rien rempli ou si il a mis plusieurs caractères
+    else if (guess.length != 1) { // Si l'utilisateur n'a rien rempli ou si il a mis plusieurs caractères
         alertPrompt = "! Mauvaise saisie, recommencez";
         console.log(alertPrompt);
         guessLetter(); // On repart au début de la fonction
