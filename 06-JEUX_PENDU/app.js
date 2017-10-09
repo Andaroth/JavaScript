@@ -15,7 +15,7 @@ var guessLetter = function() {
     console.log("you typed "+guess);
     
     if (guess.length != 1) {
-        console.log("Un seul charactère...");
+        console.log("Un seul caractère...");
     }
     else if (alreadyTested.indexOf(guess) != -1) {
         console.log("Déjà entré :/");
