@@ -48,7 +48,7 @@ for (i=0;i<101;i++) {
 
 }
 
-// part 3
+// part 4
 var txt = "";
 for (i=0;i<6;i++) {
     console.log(txt);
