@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <title>Exo JavaScript 2 Axel Fiolle</title>
+        <meta charset="utf-8" />
+    </head>
+    
+    <body>
+        <p>Ctrl(Cmd)+Shift+I ou F12 pour afficher la console...</p>
+        
+        <script type="text/javascript">
+            var lang = "fr";
+            var saveMsg;
+            switch (lang) {
+                case "fr":
+                    saveMsg = "Bonjour tout le monde";
+                    break;
+                case "en":
+                    saveMsg = "Hello World";
+                    break;
+                case "es":
+                    saveMsg = "Hola, Mundo";
+                    break;
+                default:
+                    saveMsg = "Cheatin' uh";
+                    break;
+            }
+            console.log(saveMsg+" !");
+            document.write("<br/>&gt; "+saveMsg+" !");
+        </script>
+        
+    </body>
+    
+</html>
