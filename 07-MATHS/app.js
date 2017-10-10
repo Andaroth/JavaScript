@@ -26,7 +26,6 @@ console.log("randsecond: "+randSecnd);
 var randTrois = Math.ceil( Math.random() *10);
 console.log("randtrois: "+randTrois);
 
-
 let cQuoiLeNomDuJeu = ["Goro","Johnny Cago","Kano","Liu Kano","Raiden","Reptil","Scorption","Shang","Tsun","Sonya","Sub-Zero"];
 // Alors ici je random, ensuite je multiplie par la longueur du tableau pour être compris entre 0 et 11. Je floor pour un entier, si je ceil je risque d'être au dessus de la limite. 
 var randChar = Math.floor(Math.random()*(cQuoiLeNomDuJeu.length));
