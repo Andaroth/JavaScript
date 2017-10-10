@@ -43,8 +43,13 @@ target = document.querySelector("h2");
 target.textContent = "<strong>HTML doens't work !</strong>";
 
 // 4
-var parent = document.querySelector("ol");
-target = parent.children;
+var parent = document.querySelector("ul");
+var newLi= document.createElement("li");
+newLi.innerHTML = "Mon meilleur ami est <a href=\"http://google.com/\" target=\"_blank\">Google</a>";
+parent.appendChild(newLi);
+
+
+/*target = parent.children;
 for (i=0;i<target.length;i++) {
-    parent.removeChild();
-}
+    parent.removeChild("li");
+}*/

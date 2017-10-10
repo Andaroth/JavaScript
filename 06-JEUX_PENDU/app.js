@@ -10,7 +10,6 @@ var tryNumb = 0; // Le nombre d'essais
 var failNumb = 0; // Un compteur d'échecs
 var leftTry = motLong - failNumb; // Le nombre d'essais restants
 let alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
-
 // Je créé à l'avance la fonction gameOver.
 function gameOver() {
     alert("Vous avez perdu... le pendu est PENDU !!! tin tiin~");
@@ -22,15 +21,12 @@ function gameWin() {
 }
 // La fonction principale
 function guessLetter() {
-    
     if (leftTry == 0) { // On vérifie d'abord si le joueur n'a pas cramé tous ses essais
         gameOver(); // Sinon c'est bye bye, ciao, à la prochaine, merci d'être passé
     }
-    
     var guess = window.prompt(alertPrompt+"\nEssayez de trouver les lettres du pendu : \n"+promptMot,""); // Je demande la saisie au joueur
     guess = guess.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
     console.log("< you typed "+guess);
-    
     /* 
         Je dois créer une boucle qui va tester la saisie.
         Mais d'abord, je vais tester quelques exceptions, au cas où l'utilisateur fait des choses imprévues par la boucle. Je fais cela grâce à if et else if. 
@@ -56,7 +52,6 @@ function guessLetter() {
     else { // Si aucune exception n'est rencontrée, c'est parti pour le début de la fin, une grande boucle va tourner
         alreadyTested.push(guess); // Premièrement, j'ajoute la saisie au tableau des... saisies :) Et ce à chaque tour donc. 
         tryNumb++; // On ajoute un essai au compteur
-        
         if (soluce.indexOf(guess) == -1 ) { // Direct après, je vérifie si la saisie est absente du tableau soluce.
             failNumb++; // Si la saisie est fausse, non seulement j'te colle un fail... 
             leftTry = motLong - failNumb; // refresh
