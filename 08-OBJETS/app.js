@@ -25,9 +25,7 @@ function giveItem() {
     document.write("<br/>"+Character.name+" vous donne son "+Character.items_to_give[i]+"<br/>");
 }
 
-function attack(a,b) {
-    let source = a;
-    let cible = b;
+function attack(source,cible) {
     var degats = source["level"] * weapon["damage"];
     document.write(source["name"]+" attaque "+cible["name"]+" et lui inflige "+degats+" de dommage<br/>");
     cible["life"] -= degats;
