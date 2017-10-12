@@ -22,7 +22,7 @@ function giveItem() {
     console.log(i);
     
     console.log(Character.name+" vous donne son "+(Character.items_to_give[i]).toLowerCase());
-    document.write("<br/>"+Character.name+" vous donne son "+Character.items_to_give[i]);
+    document.write("<br/>"+Character.name+" vous donne son "+Character.items_to_give[i]+"<br/>");
 }
 
 function attack(a,b) {
@@ -34,5 +34,5 @@ function attack(a,b) {
     document.write(cible["name"]+" a "+cible["life"]+" points de vie");
 }
 
-// giveItem();
+giveItem();
 attack(Character,opponentCharacter);
