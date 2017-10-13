@@ -171,6 +171,7 @@ if (init == false) {
     init = true;
 }
 // Si on clique sur le bouton du formulaire, lancer la fonction principale
-document.getElementById("send").onclick = function(){
+document.getElementById("send").onclick = function(event){
+    event.preventDefault();
     guessLetter();
 };
