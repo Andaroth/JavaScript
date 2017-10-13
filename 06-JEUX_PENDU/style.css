@@ -1,6 +1,7 @@
 body {
     text-align: center;
     font-family: Georgia, serif;
+    font-size: 1em;
 }
 .box {
     display: block;
