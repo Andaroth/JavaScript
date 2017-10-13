@@ -2,7 +2,6 @@ body {
     text-align: center;
     font-family: Georgia, serif;
 }
-* { box-sizing: border-box; }
 .box {
     display: block;
     padding: 10px;
@@ -11,8 +10,8 @@ body {
     border-radius: 5px;
     background: lightgrey;
 }
-#alert { font-style: italic; }
-#try_show {
+.alert { font-style: italic; }
+.try_show {
     font-size: 2em;
 }
 input {
@@ -23,13 +22,13 @@ input {
     margin: 10px auto;
     font-size: 1.5em;
 }
-#prompt {width: 50%;}
-#send {
+.prompt {width: 50%;}
+.send {
     background: green;
     color: white;
     font-size: 1.3em;
 }
-#try_list {
+.try_list {
     display: block;
     max-width: 600px;
     padding-left: 0;
@@ -46,7 +45,7 @@ li {
     color: white;
     border-radius: 2px;
 }
-li.start {
+.start {
     background: skyblue;
     color: white;
 }
