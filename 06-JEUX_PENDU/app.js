@@ -20,7 +20,7 @@ function gameOver() {
 // Je créé à l'avance la fonction gameWin.
 function gameWin() {
     console.log("Win !");
-    var winMsg = "Félicitations !! \nVous avez réussi en "+tryNumb+" essai(s). Le mot était donc "+motMystere+" et vous vous êtes trompé "+failNumb+" fois.";
+    var winMsg = "<strong>Félicitations !! </strong><br/>Vous avez réussi en "+tryNumb+" essai(s). Le mot était donc "+motMystere+" et vous vous êtes trompé "+failNumb+" fois.";
     // alert(winMsg);
     document.getElementById("form").innerHTML = "";
     document.getElementById("alert").innerHTML = winMsg;
