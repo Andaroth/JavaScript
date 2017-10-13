@@ -26,13 +26,14 @@ function gameWin() {
 function addInTable(arg) {
     var parent = document.getElementById("try_list");
     var newLi= document.createElement("li");
-    newLi.innerHTML = "<li>"+arg+"</li>";
+    newLi.innerHTML = arg;
     parent.appendChild(newLi);
 }
 
 function initialize() {
     document.getElementById("try_show").innerHTML = promptMot;
     document.getElementById("prompt").setAttribute( "autocomplete", "off" );
+    document.getElementById("prompt").focus()
 }
 
 // La fonction principale
@@ -44,7 +45,6 @@ function guessLetter() {
     var guess = document.getElementById("prompt").value;
     document.getElementById('prompt').value = ""; 
     guess = guess.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
-    addInTable(guess);
     console.log("< you typed "+guess);
     /* 
         Je dois créer une boucle qui va tester la saisie.
@@ -59,7 +59,7 @@ function guessLetter() {
         gameWin(); // Et c'est gagné :)
     }
     else if (guess.length != 1) { // Si l'utilisateur n'a rien rempli ou si il a mis plusieurs caractères
-        alertPrompt = "! Mauvaise saisie, recommencez"; // Je définis un message d'erreur
+        alertPrompt = "<strong>Mauvaise saisie</strong>, recommencez"; // Je définis un message d'erreur
         document.getElementById("alert").innerHTML = alertPrompt;
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
@@ -68,18 +68,19 @@ function guessLetter() {
         tryNumb++; // On ajoute un essai au compteur car...
         failNumb++; // ...ça compte aussi comme un fail, vu que le joueur a les essais sous les yeux
         leftTry = motLong - failNumb; // refresh
-        alertPrompt = "X Déjà essayé, "+leftTry+" essais restants";
+        alertPrompt = "<strong>Déjà essayé</strong>, "+leftTry+" essais restants";
         document.getElementById("alert").innerHTML = alertPrompt;
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
     }
     else { // Si aucune exception n'est rencontrée, c'est parti pour le début de la fin, une grande boucle va tourner
         alreadyTested.push(guess); // Premièrement, j'ajoute la saisie au tableau des... saisies :) Et ce à chaque tour donc. 
+        addInTable(guess);
         tryNumb++; // On ajoute un essai au compteur
         if (soluce.indexOf(guess) == -1 ) { // Direct après, je vérifie si la saisie est absente du tableau soluce.
             failNumb++; // Si la saisie est fausse, non seulement j'te colle un fail... 
             leftTry = motLong - failNumb; // refresh
-            alertPrompt = "X Nope, "+leftTry+" essais restants";
+            alertPrompt = "<strong>Nope</strong>, "+leftTry+" essais restants";
             document.getElementById("alert").innerHTML = alertPrompt;
             console.log(alertPrompt);
             
