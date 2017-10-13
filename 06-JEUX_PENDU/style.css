@@ -64,3 +64,6 @@ li {
     background: skyblue;
     color: white;
 }
+.hidden {
+    display: none;
+}
