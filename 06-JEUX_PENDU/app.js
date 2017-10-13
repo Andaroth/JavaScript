@@ -172,8 +172,16 @@ function guessLetter() {
         uiAlert.innerHTML = alertPrompt;
         console.log(alertPrompt);
     }
-    else if (guess.length != 1) { // Si l'utilisateur n'a rien rempli ou si il a mis plusieurs caractères
-        alertPrompt = "<strong>Mauvaise saisie</strong>, recommencez"; // Je définis un message d'erreur
+    else if (guess.length == 0) { // Si l'utilisateur n'a rien rempli
+        alertPrompt = "<strong>Mauvaise saisie</strong>, recommencez"; 
+        uiAlert.innerHTML = alertPrompt; // Je l'affiche dans le DOM
+        console.log(alertPrompt);
+    }
+    else if (guess.length > 3) { // Si l'utilisateur tente un mot entier
+        tryNumb++; // On ajoute un essai au compteur car...
+        failNumb++; // ...ça compte aussi comme un fail, vu que le joueur a les essais sous les yeux
+        leftTry = motLong - failNumb; // refresh
+        alertPrompt = "Vous faites <strong>erreur</strong> ! "+leftTry+" essais restants"; // Je définis un message d'erreur
         uiAlert.innerHTML = alertPrompt; // Je l'affiche dans le DOM
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
