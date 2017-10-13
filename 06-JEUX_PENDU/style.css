@@ -15,7 +15,9 @@ body {
 .rules {
     margin: 5px auto;
 }
-.alert { font-style: italic; }
+.alert { 
+    font-style: italic; 
+}
 .try_show {
     font-size: 2em;
     margin: 15px auto;
