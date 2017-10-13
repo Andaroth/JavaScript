@@ -51,7 +51,7 @@ var motLong = 0; // La longueur du mot
 var winCount = 0; // Le compteur de réussites
 var tryNumb = 0; // Le nombre d'essais
 var failNumb = 0; // Un compteur d'échecs
-var leftTry = motLong - failNumb; // Le nombre d'essais restants
+var leftTry = motLong*2 - failNumb; // Le nombre d'essais restants
 let alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
 var guess; // La variable pour stocker la proposition du joueur
 // La fonction GameOver
@@ -96,7 +96,7 @@ function reset() {
     winCount = 0;
     tryNumb = 0;
     failNumb = 0;
-    leftTry = motLong - failNumb; 
+    leftTry = motLong*2 - failNumb; 
     alreadyTested = [];
     init = false; 
     uiRestart.classList.add("hidden");
@@ -129,7 +129,7 @@ function strToArray(arg) {
     promptMot = found.join(" "); // Le mot pour afficher le mot caché dans le prompt
     alertPrompt = ""; // Une chaîne pour indiquer l'erreur du joueur dans le prompt
     motLong = soluce.length; // La longueur du mot
-    leftTry = motLong - failNumb; // Le nombre d'essais restants
+    leftTry = motLong*2 - failNumb; // Le nombre d'essais restants
     uiTry.innerHTML = promptMot; // Afficher dans le DOM
     console.log(found);
 }
@@ -178,10 +178,10 @@ function guessLetter() {
         console.log(alertPrompt);
     }
     else if (guess.length > 3) { // Si l'utilisateur tente un mot entier
-        tryNumb++; // On ajoute un essai au compteur car...
-        failNumb++; // ...ça compte aussi comme un fail, vu que le joueur a les essais sous les yeux
-        leftTry = motLong - failNumb; // refresh
-        alertPrompt = "Vous faites <strong>erreur</strong> ! "+leftTry+" essais restants"; // Je définis un message d'erreur
+        tryNumb++; // On ajoute un essai
+        failNumb++; // On enregistre un fail
+        leftTry = motLong*2 - failNumb; // refresh
+        alertPrompt = "Vous faites <strong>erreur</strong> ! <strong>"+leftTry+"</strong> essais restants"; // Je définis un message d'erreur
         uiAlert.innerHTML = alertPrompt; // Je l'affiche dans le DOM
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
@@ -189,8 +189,8 @@ function guessLetter() {
     else if (alreadyTested.indexOf(guess) != -1) { // Si la lettre a déjà été proposée
         tryNumb++; // On ajoute un essai au compteur car...
         failNumb++; // ...ça compte aussi comme un fail, vu que le joueur a les essais sous les yeux
-        leftTry = motLong - failNumb; // refresh
-        alertPrompt = "<strong>Déjà essayé</strong>, "+leftTry+" essais restants";
+        leftTry = motLong*2 - failNumb; // refresh
+        alertPrompt = "<strong>Déjà essayé</strong>, <strong>"+leftTry+"</strong> essais restants";
         uiAlert.innerHTML = alertPrompt;
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
@@ -201,8 +201,8 @@ function guessLetter() {
         tryNumb++; // On ajoute un essai au compteur
         if (soluce.indexOf(guess) == -1 ) { // Direct après, je vérifie si la saisie est absente du tableau soluce.
             failNumb++; // Si la saisie est fausse, non seulement j'te colle un fail... 
-            leftTry = motLong - failNumb; // refresh
-            alertPrompt = "<strong>Nope</strong>, "+leftTry+" essais restants";
+            leftTry = motLong*2 - failNumb; // refresh
+            alertPrompt = "<strong>Nope</strong>, plus que <strong>"+leftTry+"</strong> erreurs possibles";
             uiAlert.innerHTML = alertPrompt;
             console.log(alertPrompt);
             // guessLetter(); // ... mais en plus tu retourne au début!
