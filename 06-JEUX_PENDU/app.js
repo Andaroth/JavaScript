@@ -3,6 +3,7 @@
  * par Axel Fiolle
  * @ becode.org
  */
+
 // Tableau de mots aléatoires
 let randWord = [
     "AMOVIBLE",
@@ -32,7 +33,6 @@ let randWord = [
     "TYPE",
     "CLASSE"
 ];
-
 // Je créé mes variables globales
 var init = false; // Pour ne pas redémarrer la fonction initialize()
 let soluce = []; // Pour recevoir le mot demandé
@@ -47,7 +47,6 @@ var failNumb = 0; // Un compteur d'échecs
 var leftTry = motLong - failNumb; // Le nombre d'essais restants
 let alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
 var guess; // La variable pour stocker la proposition du joueur
-
 // La fonction GameOver
 function gameOver() {
     var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~<br/>Le mot était <strong>"+motMystere+"</strong>";
@@ -56,11 +55,11 @@ function gameOver() {
     document.getElementById("restart").classList.remove("hidden");
     document.getElementById("prompt").classList.add("hidden");
     document.getElementById("send").classList.add("hidden");
-    
-    document.querySelector("form").submit() = function(event) { 
-        event.preventDefault; // Empêche l'envoi du formulaire
-        reset(); 
-    }
+    /*document.addEventListener("keydown", function (e) { 
+        if (e.keyCode === 13) {
+            reset(); 
+        }
+    });*/
 }
 // Je créé à l'avance la fonction gameWin.
 function gameWin() {
@@ -79,8 +78,9 @@ function addInTable(arg) {
     newLi.innerHTML = arg;
     parent.appendChild(newLi);
 }
+// Fonction à appeler pour recommencer une partie
 function reset() {
-    // Je commence par remettre à zéro toutes mes variables globales
+    // Remettre à zéro toutes mes variables globales
     soluce;
     found = [];
     motMystere;
@@ -101,7 +101,7 @@ function reset() {
     initialize(); // Relancer la fonction de démarrage
 }
 // Fonction pour définir le mot à rechercher et rafraîchir certaines globales
-function strToTable(arg) {
+function strToArray(arg) {
     if (arg != undefined) { // Si il y a un argument à la fonction
         arg = arg.toUpperCase(); // Mettre tout en MAJUSCULE
         soluce = arg.split(""); // Et créer un tableau
@@ -127,15 +127,13 @@ function strToTable(arg) {
     document.getElementById("try_show").innerHTML = promptMot; // Afficher dans le DOM
     console.log(found);
 }
-
 // La fonction qui se lance au démarrage
 function initialize() {
     // var selectSoluce = window.prompt("Choisissez un mot à faire deviner :");
-    
     var randOne = Math.floor(Math.random()*randWord.length);
+    console.log("Random is : "+randOne);
     var selectSoluce = randWord[randOne];
-    
-    strToTable(selectSoluce); // Initialiser le début de la partie
+    strToArray(selectSoluce); // Initialiser le début de la partie
     document.getElementById("prompt").setAttribute( "autocomplete", "off" ); // Pasde saisie automatique
     document.getElementById("prompt").focus(); // Forcer le curseur à aller dans le input
 }
@@ -149,7 +147,7 @@ function guessLetter() {
     guess = document.getElementById("prompt").value; // On assigne le contenu du input texte à la saisie
     document.getElementById('prompt').value = ""; // On vide le input pour une meilleure expérience
     guess = guess.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
-    strToTable(); // Refresh
+    strToArray(); // Refresh
     console.log("< you typed "+guess);
     /* 
         Je dois créer une boucle qui va tester la saisie.
@@ -193,7 +191,6 @@ function guessLetter() {
             alertPrompt = "<strong>Nope</strong>, "+leftTry+" essais restants";
             document.getElementById("alert").innerHTML = alertPrompt;
             console.log(alertPrompt);
-            
             // guessLetter(); // ... mais en plus tu retourne au début!
         } 
         else {
@@ -218,7 +215,6 @@ function guessLetter() {
                     console.log(">>"+found[i]+" est ajouté à found à l'index "+i+" ("+winCount+" lettres ont été trouvées)");
                 }
             } // la raison cette boucle un peu spéciale est de trouver toutes les lettres identiques en seul tour car telles sont les règles du pendu
-            
             /* 
             Une fois que la boucle a fini de routourner, 
             On vérifie si le joueur a trouvé toutes les lettres en comparant le compteur de lettres trouvées avec la longueur du mot. 
@@ -226,9 +222,7 @@ function guessLetter() {
             if (winCount == motLong) { // Si le compte y est, félicitations, bravo, congratulations ! Les esclaves peuvent arrêter de tourner, le jeu est terminé tu as gagné !
                 gameWin(); // Go fonction win :)
             } 
-        }
-        
-         
+        } // La fin du else de comparaison
     } // La fin du grand else des exceptions
 } // La fin de la déclaration guessLetter();
 // Faut pas oublier de faire tourner la routourne en lançant la fonction principale ! :D 
