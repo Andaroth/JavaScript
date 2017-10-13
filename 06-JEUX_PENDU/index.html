@@ -3,12 +3,29 @@
 <html>
     
     <head>
-        <title>Exo JavaScript 6 Axel Fiolle</title>
+        <title>Le jeu du pendu</title>
+        <meta name="description" content="Exo JavaScript 6 Axel Fiolle" />
         <meta charset="utf-8" />
+        
+        <link rel="stylesheet" href="./style.css">
     </head>
     
     <body>
-        <p>Ctrl(Cmd)+Shift+I ou F12 pour afficher la console...</p>
+        <h1>Essayez de trouver les lettres du pendu</h1>
+        
+        <div class="box">
+            <p>Une lettre à la fois ou le mot en entier.</p>
+            <div id="alert"></div>
+            <p id="try_show">Ce jeu nécessite JavaScript</p>
+            <form id="form" action="#">
+                <input id="prompt" type="text" />
+                <input id="send" type="submit" />
+            </form>
+        </div>
+        
+        <ul id="try_list">
+            <li class="start">></li>
+        </ul>
         
         <script src="./app.js"></script>
     </body>
