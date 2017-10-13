@@ -144,7 +144,7 @@ function guessLetter() {
             À chaque tour, la variable i augmente de 1. Au départ elle vaut 0. 
             Cette boucle permet comparer la saisie avec une lettre du mot à chaque tour. Le fait que i augmente de 1 va me permettre de cibler la lettre suivante à chaque tour. 
             */
-            for (i=0;i<motLong;i++) { 
+            for (i=0;i<motLong;i++) {  // L'ordre des termes étant important, je ne fais PAS for (let i in motLong)
 
                 if (guess == soluce[i]) // Si la saisie == la lettre ciblée par l'index i dans le tableau soluce
                 {
