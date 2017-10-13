@@ -28,7 +28,7 @@ function gameWin() {
     console.log("Win !");
     var winMsg = "<strong>Félicitations !! </strong><br/>Vous avez réussi en "+tryNumb+" essai(s). Le mot était donc "+motMystere+" et vous vous êtes trompé "+failNumb+" fois.";
     // alert(winMsg);
-    document.getElementById("form").innerHTML = "";
+    document.getElementById("form").innerHTML = "<input class=\"send\" id=\"restart\" value=\"Recommencer\" type=\"submit\" />";
     document.getElementById("alert").innerHTML = winMsg;
 }
 function addInTable(arg) {
@@ -180,4 +180,9 @@ if (init == false) {
 document.getElementById("send").onclick = function(event){
     event.preventDefault();
     guessLetter();
+};
+document.getElementById("restart").onclick = function(event){
+    event.preventDefault();
+    init = false;
+    reset();
 };
