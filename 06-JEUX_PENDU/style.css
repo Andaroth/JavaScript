@@ -27,15 +27,21 @@ input {
     cursor: pointer;
 }
 .prompt {
-    width: 50%;
-    min-width: 200px;
+    width: 50px;
+    text-align: center;
     outline: 0;
     border: 1px solid white;
     box-sizing: border-box;
 }
-.prompt:hover,
+.prompt:hover {
+    border: 1px solid grey;
+}
 .prompt:focus {
     border: 1px solid blue;
+}
+.promptLarge {
+    width: 50%;
+    max-width: 200px;
 }
 .send {
     background: green;
@@ -67,6 +73,8 @@ li {
 .start {
     background: skyblue;
     color: white;
+    width: auto;
+    padding: 0 7px;
 }
 .hidden {
     display: none;

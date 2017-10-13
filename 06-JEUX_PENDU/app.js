@@ -33,6 +33,13 @@ let randWord = [
     "TYPE",
     "CLASSE"
 ];
+// Je cible des éléments souvent utilisés
+var uiPrompt = document.getElementById("prompt");
+var uiTry = document.getElementById("try_show");
+var uiRestart = document.getElementById("restart");
+var uiAlert = document.getElementById("alert");
+var uiSend = document.getElementById("send");
+var uiList = document.getElementById("try_list");
 // Je créé mes variables globales
 var init = false; // Pour ne pas redémarrer la fonction initialize()
 let soluce = []; // Pour recevoir le mot demandé
@@ -51,10 +58,10 @@ var guess; // La variable pour stocker la proposition du joueur
 function gameOver() {
     var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~<br/>Le mot était <strong>"+motMystere+"</strong>";
     // alert(lostMsg);
-    document.getElementById("alert").innerHTML = lostMsg;
-    document.getElementById("restart").classList.remove("hidden");
-    document.getElementById("prompt").classList.add("hidden");
-    document.getElementById("send").classList.add("hidden");
+    uiAlert.innerHTML = lostMsg;
+    uiRestart.classList.remove("hidden");
+    uiPrompt.classList.add("hidden");
+    uiSend.classList.add("hidden");
     /*document.addEventListener("keydown", function (e) { 
         if (e.keyCode === 13) {
             reset(); 
@@ -66,17 +73,16 @@ function gameWin() {
     console.log("Win !");
     var winMsg = "<strong>Félicitations !! </strong><br/>Vous avez réussi en "+tryNumb+" essai(s). Le mot était donc "+motMystere+" et vous vous êtes trompé "+failNumb+" fois.";
     // alert(winMsg);
-    document.getElementById("restart").classList.remove("hidden");
-    document.getElementById("prompt").classList.add("hidden");
-    document.getElementById("send").classList.add("hidden");
-    document.getElementById("alert").innerHTML = winMsg;
+    uiRestart.classList.remove("hidden");
+    uiPrompt.classList.add("hidden");
+    uiSend.classList.add("hidden");
+    uiAlert.innerHTML = winMsg;
 }
 // Fonction pour ajouter la saisie dans la liste
 function addInTable(arg) {
-    var parent = document.getElementById("try_list");
     var newLi= document.createElement("li");
     newLi.innerHTML = arg;
-    parent.appendChild(newLi);
+    uiList.appendChild(newLi);
 }
 // Fonction à appeler pour recommencer une partie
 function reset() {
@@ -93,11 +99,11 @@ function reset() {
     leftTry = motLong - failNumb; 
     alreadyTested = [];
     init = false; 
-    document.getElementById("restart").classList.add("hidden");
-    document.getElementById("prompt").classList.remove("hidden");
-    document.getElementById("send").classList.remove("hidden");
-    document.getElementById("alert").innerHTML = "";
-    document.getElementById("try_list").innerHTML = "<li class=\"start\">&gt;</li>";
+    uiRestart.classList.add("hidden");
+    uiPrompt.classList.remove("hidden");
+    uiSend.classList.remove("hidden");
+    uiAlert.innerHTML = "";
+    uiList.innerHTML = "<li class=\"start\">Vos essais &gt;</li>";
     initialize(); // Relancer la fonction de démarrage
 }
 // Fonction pour définir le mot à rechercher et rafraîchir certaines globales
@@ -124,7 +130,7 @@ function strToArray(arg) {
     alertPrompt = ""; // Une chaîne pour indiquer l'erreur du joueur dans le prompt
     motLong = soluce.length; // La longueur du mot
     leftTry = motLong - failNumb; // Le nombre d'essais restants
-    document.getElementById("try_show").innerHTML = promptMot; // Afficher dans le DOM
+    uiTry.innerHTML = promptMot; // Afficher dans le DOM
     console.log(found);
 }
 // La fonction qui se lance au démarrage
@@ -134,17 +140,17 @@ function initialize() {
     console.log("Random is : "+randOne);
     var selectSoluce = randWord[randOne];
     strToArray(selectSoluce); // Initialiser le début de la partie
-    document.getElementById("prompt").setAttribute( "autocomplete", "off" ); // Pasde saisie automatique
-    document.getElementById("prompt").focus(); // Forcer le curseur à aller dans le input
+    uiPrompt.setAttribute( "autocomplete", "off" ); // Pasde saisie automatique
+    uiPrompt.focus(); // Forcer le curseur à aller dans le input
 }
 // La fonction principale
 function guessLetter() {
-    document.getElementById("alert").innerHTML = ""; // Vider l'alerte
+    uiAlert.innerHTML = ""; // Vider l'alerte
     if (leftTry == 0) { // On vérifie d'abord si le joueur n'a pas cramé tous ses essais
         gameOver(); // Sinon c'est bye bye, ciao, à la prochaine, merci d'être passé
     }
      // var guess = window.prompt(alertPrompt+"\nEssayez de trouver les lettres du pendu : \n"+promptMot,""); // Je demande la saisie au joueur
-    guess = document.getElementById("prompt").value; // On assigne le contenu du input texte à la saisie
+    guess = uiPrompt.value; // On assigne le contenu du input texte à la saisie
     document.getElementById('prompt').value = ""; // On vide le input pour une meilleure expérience
     guess = guess.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
     strToArray(); // Refresh
@@ -156,19 +162,19 @@ function guessLetter() {
     if (guess == motMystere) { // Si le joueur entre direct le mot recherché
         tryNumb++; // On ajoute un essai au compteur, car ça compte quand-même. 
         promptMot = soluce.join(" "); // On sélectionne la solution
-        document.getElementById("try_show").innerHTML = promptMot; // Affecter au DOM
-        document.getElementById("alert").innerHTML = alertPrompt; // Afficher message félicitations au DOM
+        uiTry.innerHTML = promptMot; // Affecter au DOM
+        uiAlert.innerHTML = alertPrompt; // Afficher message félicitations au DOM
         console.log("GUESS RIGHT !!!");
         gameWin(); // Et c'est gagné :)
     }
     else if (guess == " ")  { // Si l'utilisateur essaie de saisir un espace
         alertPrompt = "<strong>Pas d'espaces</strong>, recommencez"; 
-        document.getElementById("alert").innerHTML = alertPrompt;
+        uiAlert.innerHTML = alertPrompt;
         console.log(alertPrompt);
     }
     else if (guess.length != 1) { // Si l'utilisateur n'a rien rempli ou si il a mis plusieurs caractères
         alertPrompt = "<strong>Mauvaise saisie</strong>, recommencez"; // Je définis un message d'erreur
-        document.getElementById("alert").innerHTML = alertPrompt; // Je l'affiche dans le DOM
+        uiAlert.innerHTML = alertPrompt; // Je l'affiche dans le DOM
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
     }
@@ -177,7 +183,7 @@ function guessLetter() {
         failNumb++; // ...ça compte aussi comme un fail, vu que le joueur a les essais sous les yeux
         leftTry = motLong - failNumb; // refresh
         alertPrompt = "<strong>Déjà essayé</strong>, "+leftTry+" essais restants";
-        document.getElementById("alert").innerHTML = alertPrompt;
+        uiAlert.innerHTML = alertPrompt;
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
     }
@@ -189,7 +195,7 @@ function guessLetter() {
             failNumb++; // Si la saisie est fausse, non seulement j'te colle un fail... 
             leftTry = motLong - failNumb; // refresh
             alertPrompt = "<strong>Nope</strong>, "+leftTry+" essais restants";
-            document.getElementById("alert").innerHTML = alertPrompt;
+            uiAlert.innerHTML = alertPrompt;
             console.log(alertPrompt);
             // guessLetter(); // ... mais en plus tu retourne au début!
         } 
@@ -211,7 +217,7 @@ function guessLetter() {
                     winCount++; // On indique qu'une lettre à été trouvée
                     console.log("win: "+winCount);
                     promptMot = found.join(" "); 
-                    document.getElementById("try_show").innerHTML = promptMot; // On actualise l'aperçu du mot dans le prompt
+                    uiTry.innerHTML = promptMot; // On actualise l'aperçu du mot dans le prompt
                     console.log(">>"+found[i]+" est ajouté à found à l'index "+i+" ("+winCount+" lettres ont été trouvées)");
                 }
             } // la raison cette boucle un peu spéciale est de trouver toutes les lettres identiques en seul tour car telles sont les règles du pendu
@@ -230,13 +236,21 @@ if (init == false) {
     initialize();
     init = true;
 }
+uiPrompt.onkeyup = function() {
+    guess = uiPrompt.value;
+    if (guess.length>1) {
+        uiPrompt.classList.add("promptLarge");
+    } else {
+        uiPrompt.classList.remove("promptLarge");
+    }
+}
 // Si on clique sur le bouton du formulaire, lancer la fonction principale
-document.getElementById("send").onclick = function(event){
+uiSend.onclick = function(event){
     event.preventDefault(); // Empêche le boutton de rafraîchir la page
     guessLetter(); // Go dans la boucle
 };
 // Le bouton reset
-document.getElementById("restart").onclick = function(event){
+uiRestart.onclick = function(event){
     event.preventDefault();
     reset();
 };
