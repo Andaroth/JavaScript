@@ -23,6 +23,9 @@ input {
     margin: 10px auto;
     font-size: 1.5em;
 }
+.send:hover {
+    cursor: pointer;
+}
 .prompt {
     width: 50%;
     outline: 0;
