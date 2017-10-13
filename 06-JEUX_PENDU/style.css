@@ -28,6 +28,7 @@ input {
 }
 .prompt {
     width: 50%;
+    min-width: 200px;
     outline: 0;
     border: 1px solid white;
     box-sizing: border-box;

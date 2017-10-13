@@ -18,8 +18,10 @@ var failNumb = 0; // Un compteur d'échecs
 var leftTry = motLong - failNumb; // Le nombre d'essais restants
 let alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
 var guess; // La variable pour stocker la proposition du joueur
+
+// La fonction GameOver
 function gameOver() {
-    var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~";
+    var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~<br/>Le mot était <strong>"+motMystere+"</strong>";
     // alert(lostMsg);
     document.getElementById("alert").innerHTML = lostMsg;
     document.getElementById("restart").classList.remove("hidden");
@@ -27,7 +29,7 @@ function gameOver() {
     document.getElementById("send").classList.add("hidden");
     
     document.querySelector("form").submit() = function(event) { 
-        event.preventDefault;
+        event.preventDefault; // Empêche l'envoi du formulaire
         reset(); 
     }
 }
@@ -41,6 +43,7 @@ function gameWin() {
     document.getElementById("send").classList.add("hidden");
     document.getElementById("alert").innerHTML = winMsg;
 }
+// Fonction pour ajouter la saisie dans la liste
 function addInTable(arg) {
     var parent = document.getElementById("try_list");
     var newLi= document.createElement("li");
@@ -48,7 +51,7 @@ function addInTable(arg) {
     parent.appendChild(newLi);
 }
 function reset() {
-    // Reset
+    // Je commence par remettre à zéro toutes mes variables globales
     soluce;
     found = [];
     motMystere;
@@ -60,30 +63,30 @@ function reset() {
     failNumb = 0;
     leftTry = motLong - failNumb; 
     alreadyTested = [];
-    init = false;
+    init = false; 
     document.getElementById("restart").classList.add("hidden");
     document.getElementById("prompt").classList.remove("hidden");
     document.getElementById("send").classList.remove("hidden");
     document.getElementById("alert").innerHTML = "";
     document.getElementById("try_list").innerHTML = "<li class=\"start\">&gt;</li>";
-    initialize();
+    initialize(); // Relancer la fonction de démarrage
 }
-// Fonction pour définir le mot à rechercher
+// Fonction pour définir le mot à rechercher et rafraîchir certaines globales
 function strToTable(arg) {
-    if (arg != undefined) {
-        arg = arg.toUpperCase();
-        soluce = arg.split("");
-        if (soluce.indexOf(" ") != -1) {
+    if (arg != undefined) { // Si il y a un argument à la fonction
+        arg = arg.toUpperCase(); // Mettre tout en MAJUSCULE
+        soluce = arg.split(""); // Et créer un tableau
+        if (soluce.indexOf(" ") != -1) { // Empêcher les espaces
             alert("Pas d'espaces !");
             reset();
         }
-        else if (soluce.length < 3) {
+        else if (soluce.length < 3) { // Longueur min du mot
             alert("3 caractères minimum");
             reset();
         }
         else {
-            for (let i in soluce) {
-                found.splice(i,1,"_");
+            for (let i in soluce) { // Sinon 
+                found.splice(i,1,"_"); // Reset le tableau des lettres trouvées
             }
         }
     }
@@ -92,28 +95,28 @@ function strToTable(arg) {
     alertPrompt = ""; // Une chaîne pour indiquer l'erreur du joueur dans le prompt
     motLong = soluce.length; // La longueur du mot
     leftTry = motLong - failNumb; // Le nombre d'essais restants
-    document.getElementById("try_show").innerHTML = promptMot;
+    document.getElementById("try_show").innerHTML = promptMot; // Afficher dans le DOM
     console.log(found);
 }
 
 // La fonction qui se lance au démarrage
 function initialize() {
     var selectSoluce = window.prompt("Choisissez un mot à faire deviner :");
-    strToTable(selectSoluce); // Choisir le mot à deviner
-    document.getElementById("prompt").setAttribute( "autocomplete", "off" );
-    document.getElementById("prompt").focus();
+    strToTable(selectSoluce); // Initialiser le début de la partie
+    document.getElementById("prompt").setAttribute( "autocomplete", "off" ); // Pasde saisie automatique
+    document.getElementById("prompt").focus(); // Forcer le curseur à aller dans le input
 }
 // La fonction principale
 function guessLetter() {
-    document.getElementById("alert").innerHTML = "";
+    document.getElementById("alert").innerHTML = ""; // Vider l'alerte
     if (leftTry == 0) { // On vérifie d'abord si le joueur n'a pas cramé tous ses essais
         gameOver(); // Sinon c'est bye bye, ciao, à la prochaine, merci d'être passé
     }
      // var guess = window.prompt(alertPrompt+"\nEssayez de trouver les lettres du pendu : \n"+promptMot,""); // Je demande la saisie au joueur
-    guess = document.getElementById("prompt").value;
-    document.getElementById('prompt').value = ""; 
+    guess = document.getElementById("prompt").value; // On assigne le contenu du input texte à la saisie
+    document.getElementById('prompt').value = ""; // On vide le input pour une meilleure expérience
     guess = guess.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
-    strToTable();
+    strToTable(); // Refresh
     console.log("< you typed "+guess);
     /* 
         Je dois créer une boucle qui va tester la saisie.
@@ -121,20 +124,20 @@ function guessLetter() {
     */
     if (guess == motMystere) { // Si le joueur entre direct le mot recherché
         tryNumb++; // On ajoute un essai au compteur, car ça compte quand-même. 
-        promptMot = soluce.join(" ");
-        document.getElementById("try_show").innerHTML = promptMot; 
-        document.getElementById("alert").innerHTML = alertPrompt;
+        promptMot = soluce.join(" "); // On sélectionne la solution
+        document.getElementById("try_show").innerHTML = promptMot; // Affecter au DOM
+        document.getElementById("alert").innerHTML = alertPrompt; // Afficher message félicitations au DOM
         console.log("GUESS RIGHT !!!");
         gameWin(); // Et c'est gagné :)
     }
-    else if (guess == " ")  {
+    else if (guess == " ")  { // Si l'utilisateur essaie de saisir un espace
         alertPrompt = "<strong>Pas d'espaces</strong>, recommencez"; 
         document.getElementById("alert").innerHTML = alertPrompt;
         console.log(alertPrompt);
     }
     else if (guess.length != 1) { // Si l'utilisateur n'a rien rempli ou si il a mis plusieurs caractères
         alertPrompt = "<strong>Mauvaise saisie</strong>, recommencez"; // Je définis un message d'erreur
-        document.getElementById("alert").innerHTML = alertPrompt;
+        document.getElementById("alert").innerHTML = alertPrompt; // Je l'affiche dans le DOM
         console.log(alertPrompt);
         // guessLetter(); // On repart au début de la fonction
     }
@@ -202,10 +205,10 @@ if (init == false) {
 }
 // Si on clique sur le bouton du formulaire, lancer la fonction principale
 document.getElementById("send").onclick = function(event){
-    event.preventDefault();
-    guessLetter();
+    event.preventDefault(); // Empêche le boutton de rafraîchir la page
+    guessLetter(); // Go dans la boucle
 };
-
+// Le bouton reset
 document.getElementById("restart").onclick = function(event){
     event.preventDefault();
     reset();
