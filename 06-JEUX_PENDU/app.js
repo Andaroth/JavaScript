@@ -1,6 +1,7 @@
-var init = false;
-let soluce = [];
-let found = [];
+// Je créé mes variables globales
+var init = false; // Pour ne pas redémarrer la fonction initialize()
+let soluce = []; // Pour recevoir le mot demandé
+let found = []; // Pour recevoir le mot en recherche
 var motMystere; // On enregistre le mot recherché pour le sortir à la fin en mode suspens
 var promptMot; // Le mot pour afficher le mot caché dans le prompt
 var alertPrompt; // Une chaîne pour indiquer l'erreur du joueur dans le prompt
@@ -9,9 +10,8 @@ var winCount = 0; // Le compteur de réussites
 var tryNumb = 0; // Le nombre d'essais
 var failNumb = 0; // Un compteur d'échecs
 var leftTry = motLong - failNumb; // Le nombre d'essais restants
-var guess;
 let alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
-
+var guess; // La variable pour stocker la proposition du joueur
 function gameOver() {
     var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~";
     // alert(lostMsg);
@@ -62,8 +62,7 @@ function strToTable(arg) {
     alertPrompt = ""; // Une chaîne pour indiquer l'erreur du joueur dans le prompt
     motLong = soluce.length; // La longueur du mot
     leftTry = motLong - failNumb; // Le nombre d'essais restants
-    document.getElementById("try_show").innerHTML = promptMot; 
-    console.log(soluce);
+    document.getElementById("try_show").innerHTML = promptMot;
     console.log(found);
 }
 
@@ -122,7 +121,6 @@ function guessLetter() {
         alreadyTested.push(guess); // Premièrement, j'ajoute la saisie au tableau des... saisies :) Et ce à chaque tour donc. 
         addInTable(guess);
         tryNumb++; // On ajoute un essai au compteur
-        console.log(soluce);
         if (soluce.indexOf(guess) == -1 ) { // Direct après, je vérifie si la saisie est absente du tableau soluce.
             failNumb++; // Si la saisie est fausse, non seulement j'te colle un fail... 
             leftTry = motLong - failNumb; // refresh
@@ -172,7 +170,7 @@ if (init == false) {
     initialize();
     init = true;
 }
-
+// Si on clique sur le bouton du formulaire, lancer la fonction principale
 document.getElementById("send").onclick = function(){
     guessLetter();
 };
