@@ -29,7 +29,6 @@ input {
 .prompt {
     width: 50px;
     text-align: center;
-    outline: 0;
     border: 1px solid white;
     box-sizing: border-box;
 }
@@ -38,6 +37,7 @@ input {
 }
 .prompt:focus {
     border: 1px solid blue;
+    outline: 0;
 }
 .promptLarge {
     width: 50%;
