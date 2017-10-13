@@ -1,3 +1,9 @@
+/*
+ * Jeu du pendu
+ * par Axel Fiolle
+ * @ becode.org
+ */
+
 // Je créé mes variables globales
 var init = false; // Pour ne pas redémarrer la fonction initialize()
 let soluce = []; // Pour recevoir le mot demandé
