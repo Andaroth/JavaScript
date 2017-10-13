@@ -22,6 +22,9 @@ function gameOver() {
     var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~";
     // alert(lostMsg);
     document.getElementById("alert").innerHTML = lostMsg;
+    document.getElementById("restart").classList.remove("hidden");
+    document.getElementById("prompt").classList.add("hidden");
+    document.getElementById("send").classList.add("hidden");
     document.getElementById("form").submit() = function(event) { 
         event.preventDefault;
         reset(); 
