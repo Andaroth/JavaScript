@@ -22,6 +22,10 @@ function gameOver() {
     var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~";
     // alert(lostMsg);
     document.getElementById("alert").innerHTML = lostMsg;
+    document.getElementById("form").submit() = function(event) { 
+        event.preventDefault;
+        reset(); 
+    }
 }
 // Je créé à l'avance la fonction gameWin.
 function gameWin() {
