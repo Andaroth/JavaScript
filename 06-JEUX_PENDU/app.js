@@ -43,10 +43,21 @@ function reset() {
     // Reset
     soluce;
     found = [];
+    motMystere;
+    promptMot;
+    motLong = 0;
+    motLong = 0;
+    winCount = 0;
+    tryNumb = 0;
+    failNumb = 0;
+    leftTry = motLong - failNumb; 
+    alreadyTested = [];
     init = false;
     document.getElementById("restart").classList.add("hidden");
     document.getElementById("prompt").classList.remove("hidden");
     document.getElementById("send").classList.remove("hidden");
+    document.getElementById("alert").innerHTML = "";
+    document.getElementById("try_list").innerHTML = "<li class=\"start\">&gt;</li>";
     initialize();
 }
 // Fonction pour définir le mot à rechercher
