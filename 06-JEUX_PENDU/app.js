@@ -140,7 +140,7 @@ function initialize() {
     console.log("Random is : "+randOne);
     var selectSoluce = randWord[randOne];
     strToArray(selectSoluce); // Initialiser le début de la partie
-    uiPrompt.setAttribute( "autocomplete", "off" ); // Pasde saisie automatique
+    uiPrompt.setAttribute( "autocomplete", "off" ); // Pas de saisie automatique
     uiPrompt.focus(); // Forcer le curseur à aller dans le input
 }
 // La fonction principale
@@ -247,7 +247,12 @@ uiPrompt.onkeyup = function() {
 // Si on clique sur le bouton du formulaire, lancer la fonction principale
 uiSend.onclick = function(event){
     event.preventDefault(); // Empêche le boutton de rafraîchir la page
-    guessLetter(); // Go dans la boucle
+    if (leftTry == 0) {
+        gameOver();
+    } else {
+        uiPrompt.focus(); // Forcer le curseur à aller dans le input
+        guessLetter(); // Go dans la boucle
+    }
 };
 // Le bouton reset
 uiRestart.onclick = function(event){
