@@ -23,11 +23,24 @@ input {
     margin: 10px auto;
     font-size: 1.5em;
 }
-.prompt {width: 50%;}
+.prompt {
+    width: 50%;
+    outline: 0;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+.prompt:hover,
+.prompt:focus {
+    border: 1px solid blue;
+}
 .send {
     background: green;
     color: white;
     font-size: 1.3em;
+    transition: .2s ease-in;
+}
+.send:hover {
+    transform: scale(.9);
 }
 .try_list {
     display: block;
