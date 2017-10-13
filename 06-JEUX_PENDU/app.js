@@ -5,7 +5,7 @@
  */
 
 // Tableau de mots aléatoires
-let randWord = ["BECODE","EMPATHIE","UTILISATEUR","GRILLE","COLONNE","BALISE","VALIDE","ALIGNEMENT","TABLEAU","STYLE","CODE","CHIFFRE","ACCOLADE","FONCTION","VARIABLE","CONDITION","BOUCLE","DESIGN","ORDINATEUR","VIRGULE","PARAGRAPHE","PORTABLE","TITRE","TYPE","CLASSE","SCRIPT","LIBRAIRIE","TABLEAU","TERMINAL","BRANCHE","SYMBOLE","INTERFACE","CLAVIER","SOURIS","INTERNET","EQUIPE","DIALOGUE","ENTRAIDE"];
+var randWord = ["BECODE","EMPATHIE","UTILISATEUR","GRILLE","COLONNE","BALISE","VALIDE","ALIGNEMENT","TABLEAU","STYLE","CODE","CHIFFRE","ACCOLADE","FONCTION","VARIABLE","CONDITION","BOUCLE","DESIGN","ORDINATEUR","VIRGULE","PARAGRAPHE","PORTABLE","TITRE","TYPE","CLASSE","SCRIPT","LIBRAIRIE","TABLEAU","TERMINAL","BRANCHE","SYMBOLE","INTERFACE","CLAVIER","SOURIS","INTERNET","EQUIPE","DIALOGUE","ENTRAIDE"];
 // Je cible des éléments du DOM souvent utilisés
 var uiPrompt = document.getElementById("prompt");
 var uiTry = document.getElementById("try_show");
@@ -15,8 +15,8 @@ var uiSend = document.getElementById("send");
 var uiList = document.getElementById("try_list");
 // Je créé mes variables globales
 var init = false; // Pour ne pas redémarrer la fonction initialize() automatiquement en fin de partie
-let soluce = []; // Pour recevoir le mot demandé
-let found = []; // Pour recevoir le mot en recherche
+var soluce = []; // Pour recevoir le mot demandé
+var found = []; // Pour recevoir le mot en recherche
 var motMystere; // On enregistre le mot recherché pour le sortir à la fin en mode suspens
 var promptMot; // Le mot pour afficher le mot caché dans le prompt
 var alertPrompt; // Une chaîne pour indiquer l'erreur du joueur dans le prompt
@@ -25,7 +25,7 @@ var winCount = 0; // Le compteur de réussites
 var tryNumb = 0; // Le nombre d'essais
 var failNumb = 0; // Un compteur d'échecs
 var leftTry = motLong*2 - failNumb; // Le nombre d'essais restants
-let alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
+var alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
 var guess; // La variable pour stocker la proposition du joueur
 // La fonction GameOver
 function gameOver() {
@@ -85,8 +85,8 @@ function strToArray(arg) {
             alert("3 caractères minimum");
             reset();
         }
-        else {
-            for (let i in soluce) { // Sinon 
+        else { // sinon
+            for (let i in soluce) { 
                 found.splice(i,1,"_"); // Reset le tableau des lettres trouvées
             }
         }
