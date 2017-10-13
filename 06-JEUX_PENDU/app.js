@@ -5,33 +5,7 @@
  */
 
 // Tableau de mots aléatoires
-let randWord = [
-    "AMOVIBLE",
-    "BECODE",
-    "EMPATHIE",
-    "UTILISATEUR",
-    "GRILLE",
-    "COLONNE",
-    "BALISE",
-    "VALIDE",
-    "ALIGNEMENT",
-    "TABLEAU",
-    "STYLE",
-    "CODE",
-    "CHIFFRE",
-    "ACCOLADE",
-    "FONCTION",
-    "VARIABLE",
-    "CONDITION",
-    "BOUCLE",
-    "DESIGN",
-    "ORDINATEUR",
-    "VIRGULE",
-    "PARAGRAPHE",
-    "PORTABLE",
-    "TITRE",
-    "TYPE",
-    "CLASSE"
+let randWord = ["BECODE","EMPATHIE","UTILISATEUR","GRILLE","COLONNE","BALISE","VALIDE","ALIGNEMENT","TABLEAU","STYLE","CODE","CHIFFRE","ACCOLADE","FONCTION","VARIABLE","CONDITION","BOUCLE","DESIGN","ORDINATEUR","VIRGULE","PARAGRAPHE","PORTABLE","TITRE","TYPE","CLASSE","SCRIPT","LIBRAIRIE","TABLEAU","TERMINAL","BRANCHE","SYMBOLE","INTERFACE","CLAVIER","SOURIS","INTERNET","EQUIPE","DIALOGUE","ENTRAIDE"
 ];
 // Je cible des éléments souvent utilisés
 var uiPrompt = document.getElementById("prompt");
@@ -124,7 +98,7 @@ function strToArray(arg) {
                 found.splice(i,1,"_"); // Reset le tableau des lettres trouvées
             }
         }
-    }
+    } // arguments
     motMystere = soluce.join(""); // On enregistre le mot recherché pour le sortir à la fin en mode suspens
     promptMot = found.join(" "); // Le mot pour afficher le mot caché dans le prompt
     alertPrompt = ""; // Une chaîne pour indiquer l'erreur du joueur dans le prompt
