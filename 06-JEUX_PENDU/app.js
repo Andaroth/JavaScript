@@ -3,6 +3,35 @@
  * par Axel Fiolle
  * @ becode.org
  */
+// Tableau de mots aléatoires
+let randWord = [
+    "AMOVIBLE",
+    "BECODE",
+    "EMPATHIE",
+    "UTILISATEUR",
+    "GRILLE",
+    "COLONNE",
+    "BALISE",
+    "VALIDE",
+    "ALIGNEMENT",
+    "TABLEAU",
+    "STYLE",
+    "CODE",
+    "CHIFFRE",
+    "ACCOLADE",
+    "FONCTION",
+    "VARIABLE",
+    "CONDITION",
+    "BOUCLE",
+    "DESIGN",
+    "ORDINATEUR",
+    "VIRGULE",
+    "PARAGRAPHE",
+    "PORTABLE",
+    "TITRE",
+    "TYPE",
+    "CLASSE"
+];
 
 // Je créé mes variables globales
 var init = false; // Pour ne pas redémarrer la fonction initialize()
@@ -101,7 +130,11 @@ function strToTable(arg) {
 
 // La fonction qui se lance au démarrage
 function initialize() {
-    var selectSoluce = window.prompt("Choisissez un mot à faire deviner :");
+    // var selectSoluce = window.prompt("Choisissez un mot à faire deviner :");
+    
+    var randOne = Math.floor(Math.random()*randWord.length);
+    var selectSoluce = randWord[randOne];
+    
     strToTable(selectSoluce); // Initialiser le début de la partie
     document.getElementById("prompt").setAttribute( "autocomplete", "off" ); // Pasde saisie automatique
     document.getElementById("prompt").focus(); // Forcer le curseur à aller dans le input
