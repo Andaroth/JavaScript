@@ -1,6 +1,10 @@
+@font-face {
+    font-family: Roboto;
+    src: url("./roboto.ttf");
+}
 body {
     text-align: center;
-    font-family: Georgia, serif;
+    font-family: Roboto, sans-erif;
     font-size: 1em;
 }
 .box {
