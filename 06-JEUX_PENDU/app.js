@@ -45,7 +45,7 @@ function gameWin() {
     uiAlert.innerHTML = winMsg;
 }
 // Fonction pour ajouter la saisie dans la liste
-function addInTable(arg) {
+function addInList(arg) {
     var newLi= document.createElement("li");
     newLi.innerHTML = arg;
     uiList.appendChild(newLi);
@@ -145,6 +145,7 @@ function guessLetter() {
         tryNumb++; // On ajoute un essai
         failNumb++; // On enregistre un fail
         leftTry = motLong*2 - failNumb; // refresh
+        addInList(guess); // J'ajoue le mot essayé à la liste
         alertPrompt = "Vous faites <strong>erreur</strong> ! <strong>"+leftTry+"</strong> essais restants"; // Je définis un message d'erreur
         uiAlert.innerHTML = alertPrompt; // Je l'affiche dans le DOM
         console.log(alertPrompt);
@@ -159,7 +160,7 @@ function guessLetter() {
     }
     else { // Si aucune exception n'est rencontrée, c'est parti pour le début de la fin, une grande boucle va tourner
         alreadyTested.push(guess); // Premièrement, j'ajoute la saisie au tableau des... saisies :) Et ce à chaque tour donc. 
-        addInTable(guess);
+        addInList(guess); // Je l'ajoute à la liste
         tryNumb++; // On ajoute un essai au compteur
         if (soluce.indexOf(guess) == -1 ) { // Direct après, je vérifie si la saisie est absente du tableau soluce.
             failNumb++; // Si la saisie est fausse, non seulement j'te colle un fail... 

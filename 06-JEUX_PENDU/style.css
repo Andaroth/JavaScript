@@ -70,19 +70,20 @@ input {
 li {
     display: block; 
     float: left;
-    width: 40px;
+    min-width: 40px;
     height: 40px;
     line-height: 40px;
     margin: 5px;
+    padding: 0 7px;
     background: grey;
     color: white;
     border-radius: 2px;
+    box-sizing: border-box;
 }
 .start {
     background: skyblue;
     color: white;
     width: auto;
-    padding: 0 7px;
 }
 .hidden {
     display: none;
