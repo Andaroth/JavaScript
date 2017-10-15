@@ -5,16 +5,16 @@
  */
 
 // Tableau de mots aléatoires
-var randWord = ["BECODE","EMPATHIE","UTILISATEUR","GRILLE","COLONNE","BALISE","VALIDE","ALIGNEMENT","TABLEAU","STYLE","CODE","CHIFFRE","ACCOLADE","FONCTION","VARIABLE","CONDITION","BOUCLE","DESIGN","ORDINATEUR","VIRGULE","PARAGRAPHE","PORTABLE","TITRE","TYPE","CLASSE","SCRIPT","LIBRAIRIE","TABLEAU","TERMINAL","BRANCHE","SYMBOLE","INTERFACE","CLAVIER","SOURIS","INTERNET","EQUIPE","DIALOGUE","ENTRAIDE"];
+var randWord = ["BECODE", "EMPATHIE", "UTILISATEUR", "GRILLE", "COLONNE", "BALISE", "VALIDE", "ALIGNEMENT", "TABLEAU", "STYLE", "CODE", "CHIFFRE", "ACCOLADE", "FONCTION", "VARIABLE", "CONDITION", "BOUCLE", "DESIGN", "ORDINATEUR", "VIRGULE", "PARAGRAPHE", "PORTABLE", "TITRE", "TYPE", "CLASSE", "SCRIPT", "LIBRAIRIE", "TABLEAU", "TERMINAL", "BRANCHE", "SYMBOLE", "INTERFACE", "CLAVIER", "SOURIS", "INTERNET", "EQUIPE", "DIALOGUE", "ENTRAIDE"];
+console.log("> "+randWord.length+" mots disponibles.");
 // Je cible des éléments du DOM souvent utilisés
-var uiPrompt = document.getElementById("prompt");
+var uiInput = document.getElementById("prompt");
 var uiTry = document.getElementById("try_show");
 var uiRestart = document.getElementById("restart");
 var uiAlert = document.getElementById("alert");
 var uiSend = document.getElementById("send");
 var uiList = document.getElementById("try_list");
-// Je créé mes variables globales
-var init = false; // Pour ne pas redémarrer la fonction initialize() automatiquement en fin de partie
+// Je créé mes variables globalesautomatiquement en fin de partie
 var targetArray = []; // Pour recevoir le mot mystère
 var foundArray = []; // Pour recevoir le mot en recherche
 var targetWord; // On enregistre le mot recherché pour le sortir à la fin en mode suspens
@@ -26,34 +26,37 @@ var tryNumb = 0; // Le nombre d'essais
 var failNumb = 0; // Un compteur d'échecs
 var leftTry = targetLength*2 - failNumb; // Le nombre d'essais restants
 var alreadyTested = []; // je créé un tableau pour enregistrer les essais du joueur
-var guess; // La variable pour stocker la proposition du joueur
+var playerInput; // La variable pour stocker la proposition du joueur
 // La fonction GameOver
 function gameOver() {
+    console.log("> gameOver()");
     var lostMsg = "Vous avez perdu... le pendu est PENDU !!! tin tiin~<br/>Le mot était <strong>"+targetWord+"</strong>";
     uiAlert.innerHTML = lostMsg;
     uiRestart.classList.remove("hidden"); // afficher
-    uiPrompt.classList.add("hidden"); // cacher grace à la classe .hidden
+    uiInput.classList.add("hidden"); // cacher grace à la classe .hidden
     uiSend.classList.add("hidden");
 }
 // Je créé à l'avance la fonction gameWin.
 function gameWin() {
-    console.log("Win !");
+    console.log("> gameWin()");
     var winMsg = "<strong>Félicitations !! </strong><br/>Vous avez réussi en "+tryNumb+" essai(s). Le mot était donc "+targetWord+" et vous vous êtes trompé "+failNumb+" fois.";
     uiRestart.classList.remove("hidden");
-    uiPrompt.classList.add("hidden");
+    uiInput.classList.add("hidden");
     uiSend.classList.add("hidden");
     uiAlert.innerHTML = winMsg;
 }
 // Fonction pour ajouter la saisie dans la liste
 function addInList(arg) {
+    console.log("> addInList(arg)");
     var newLi= document.createElement("li");
     newLi.innerHTML = arg;
     uiList.appendChild(newLi);
 }
 // Fonction à appeler pour recommencer une partie
 function reset() {
+    console.log("> reset()");
     // Remettre à zéro toutes mes variables globales
-    targetArray;
+    targetArray = [];
     foundArray = [];
     targetWord;
     targetReveal;
@@ -64,9 +67,8 @@ function reset() {
     failNumb = 0;
     leftTry = targetLength*2 - failNumb; 
     alreadyTested = [];
-    init = false; 
     uiRestart.classList.add("hidden");
-    uiPrompt.classList.remove("hidden");
+    uiInput.classList.remove("hidden");
     uiSend.classList.remove("hidden");
     uiAlert.innerHTML = "";
     uiList.innerHTML = "<li class=\"start\">Vos essais &gt;</li>";
@@ -75,6 +77,7 @@ function reset() {
 // Fonction pour définir le mot à rechercher et rafraîchir certaines globales
 function strToArray(argStr) {
     if (argStr != undefined) { // Si il y a un argument à la fonction, 
+        console.log("> strToArray(argStr)");
         argStr = argStr.toUpperCase(); // Mettre tout en MAJUSCULE
         targetArray = argStr.split(""); // Et créer un tableau
         if (targetArray.indexOf(" ") != -1) { // Empêcher les espaces
@@ -90,10 +93,10 @@ function strToArray(argStr) {
                 foundArray.splice(i,1,"_"); // Reset le tableau des lettres trouvées
             }
         }
-    } // fin des arguments
+    } else {console.log("> strToArray()");} // fin des arguments
     targetWord = targetArray.join(""); // On enregistre le mot recherché pour le sortir à la fin en mode suspens
     targetReveal = foundArray.join(" "); // Le mot pour afficher le mot caché dans le DOM
-    alertMsg = ""; // Une chaîne pour indiquer l'erreur du joueur dans le DOM
+    alertMsg; // Une chaîne pour indiquer l'erreur du joueur dans le DOM, ici on la reset. 
     targetLength = targetArray.length; // La longueur du mot
     leftTry = targetLength*2 - failNumb; // Le nombre d'essais restants
     uiTry.innerHTML = targetReveal; // Afficher dans le DOM
@@ -101,29 +104,29 @@ function strToArray(argStr) {
 }
 // La fonction qui se lance au démarrage
 function initialize() {
+    console.log("> initialize()");
     var randOne = Math.floor(Math.random()*randWord.length);
     console.log("Random is : "+randOne);
     var selectSoluce = randWord[randOne];
     strToArray(selectSoluce); // Initialiser le début de la partie
-    uiPrompt.setAttribute( "autocomplete", "off" ); // Pas de saisie automatique
-    uiPrompt.focus(); // Forcer le curseur à aller dans le input
+    uiInput.setAttribute( "autocomplete", "off" ); // Pas de saisie automatique
+    uiInput.focus(); // Forcer le curseur à aller dans le input
 }
 // La fonction principale
 function guessLetter() {
+    console.log("> guessLetter()");
+    playerInput = uiInput.value; // On assigne le contenu du input texte à la saisie
+    uiInput.value = ""; // On vide le input pour une meilleure expérience
+    uiInput.focus(); // Forcer le curseur à aller dans le input
+    playerInput = playerInput.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
     uiAlert.innerHTML = ""; // Vider l'alerte
-    if (leftTry == 0) { // On vérifie d'abord si le joueur n'a pas cramé tous ses essais
-        gameOver(); // Sinon c'est bye bye, ciao, à la prochaine, merci d'être passé
-    }
-    guess = uiPrompt.value; // On assigne le contenu du input texte à la saisie
-    document.getElementById('prompt').value = ""; // On vide le input pour une meilleure expérience
-    guess = guess.toUpperCase(); // Je dois mettre la lettre en MAJUSCULE pour qu'elle corresponde exactement à l'entrée du tableau
     strToArray(); // Refresh
-    console.log("< you typed "+guess);
+    console.log("< you typed \""+playerInput+"\"");
     /* 
         Je dois créer une boucle qui va tester la saisie.
         Mais d'abord, je vais tester quelques exceptions, au cas où l'utilisateur fait des choses imprévues par la boucle. Je fais cela grâce à if et else if. 
     */
-    if (guess == targetWord) { // Si le joueur entre direct le mot recherché
+    if (playerInput == targetWord) { // Si le joueur entre direct le mot recherché
         tryNumb++; // On ajoute un essai au compteur, car ça compte quand-même. 
         targetReveal = targetArray.join(" "); // On sélectionne la solution
         uiTry.innerHTML = targetReveal; // Affecter au DOM
@@ -131,26 +134,26 @@ function guessLetter() {
         console.log("GUESS RIGHT !!!");
         gameWin(); // Et c'est gagné :)
     }
-    else if (guess == " ")  { // Si l'utilisateur essaie de saisir un espace
+    else if (playerInput == " ")  { // Si l'utilisateur essaie de saisir un espace
         alertMsg = "<strong>Pas d'espaces</strong>, recommencez"; 
         uiAlert.innerHTML = alertMsg;
         console.log(alertMsg);
     }
-    else if (guess.length == 0) { // Si l'utilisateur n'a rien rempli
+    else if (playerInput.length == 0) { // Si l'utilisateur n'a rien rempli
         alertMsg = "<strong>Mauvaise saisie</strong>, recommencez"; 
         uiAlert.innerHTML = alertMsg; // Je l'affiche dans le DOM
         console.log(alertMsg);
     }
-    else if (guess.length > 3) { // Si l'utilisateur tente un mot entier
+    else if (playerInput.length > 3) { // Si l'utilisateur tente un mot entier
         tryNumb++; // On ajoute un essai
         failNumb++; // On enregistre un fail
         leftTry = targetLength*2 - failNumb; // refresh
-        addInList(guess); // J'ajoue le mot essayé à la liste
+        addInList(playerInput); // J'ajoue le mot essayé à la liste
         alertMsg = "Vous faites <strong>erreur</strong> ! <strong>"+leftTry+"</strong> essais restants"; // Je définis un message d'erreur
         uiAlert.innerHTML = alertMsg; // Je l'affiche dans le DOM
         console.log(alertMsg);
     }
-    else if (alreadyTested.indexOf(guess) != -1) { // Si la lettre a déjà été proposée
+    else if (alreadyTested.indexOf(playerInput) != -1) { // Si la lettre a déjà été proposée
         tryNumb++; // On ajoute un essai au compteur car...
         failNumb++; // ...ça compte aussi comme un fail, vu que le joueur a les essais sous les yeux
         leftTry = targetLength*2 - failNumb; // refresh
@@ -159,11 +162,11 @@ function guessLetter() {
         console.log(alertMsg);
     }
     else { // Si aucune exception n'est rencontrée, c'est parti pour le début de la fin, une grande boucle va tourner
-        alreadyTested.push(guess); // Premièrement, j'ajoute la saisie au tableau des... saisies :) Et ce à chaque tour donc. 
-        addInList(guess); // Je l'ajoute à la liste
+        alreadyTested.push(playerInput); // Premièrement, j'ajoute la saisie au tableau des... saisies :) Et ce à chaque tour donc. 
+        addInList(playerInput); // Je l'ajoute à la liste
         tryNumb++; // On ajoute un essai au compteur
-        if (targetArray.indexOf(guess) == -1 ) { // Direct après, je vérifie si la saisie est absente du tableau targetArray.
-            failNumb++; // Si la saisie est fausse, non seulement j'te colle un fail... 
+        if (targetArray.indexOf(playerInput) == -1 ) { // Direct après, je vérifie si la saisie est absente du tableau targetArray.
+            failNumb++; // Si la saisie est fausse, j'te colle un fail... 
             leftTry = targetLength*2 - failNumb; // refresh
             alertMsg = "<strong>Nope</strong>, plus que <strong>"+leftTry+"</strong> erreurs possibles";
             uiAlert.innerHTML = alertMsg;
@@ -177,11 +180,11 @@ function guessLetter() {
             Cette boucle permet comparer la saisie avec une lettre du mot à chaque tour. Le fait que i augmente de 1 va me permettre de cibler la lettre suivante à chaque tour. 
             */
             for (i=0;i<targetLength;i++) {  // L'ordre des termes étant important, je ne fais PAS for (let i in targetLength)
-                if (guess == targetArray[i]) // Si la saisie == la lettre ciblée par l'index i dans le tableau targetArray
+                if (playerInput == targetArray[i]) // Si la saisie == la lettre ciblée par l'index i dans le tableau targetArray
                 {
-                    console.log(">catch "+guess+" at "+i);
+                    console.log("> catch "+playerInput+" at "+i);
 
-                    foundArray.splice(i,1,guess); // On fait entrer la lettre saisie (guess) dans le tableau foundArray à l'emplacement i. Càd à sa place dans l'ordre du mot. 
+                    foundArray.splice(i,1,playerInput); // On fait entrer la lettre saisie (playerInput) dans le tableau foundArray à l'emplacement i. Càd à sa place dans l'ordre du mot. 
                     winCount++; // On indique qu'une lettre à été trouvée
                     console.log("win: "+winCount);
                     targetReveal = foundArray.join(" "); 
@@ -198,34 +201,33 @@ function guessLetter() {
             } 
         } // La fin du else de comparaison
     } // La fin du grand else des exceptions
-} // La fin de la déclaration guessLetter();
-
-uiPrompt.onkeyup = function() {
-    guess = uiPrompt.value;
-    if (guess.length>1) {
-        uiPrompt.classList.add("promptLarge");
+} // La fin de la déclaration playerInputLetter();
+// Élargir le input si le joueur veut entrer un mot complet
+uiInput.onkeyup = function() {
+    console.log("<< uiInput.onkeyup");
+    playerInput = uiInput.value;
+    if (playerInput.length>1) {
+        uiInput.classList.add("promptLarge");
     } else {
-        uiPrompt.classList.remove("promptLarge");
+        uiInput.classList.remove("promptLarge");
     }
 }
 // Si on clique sur le bouton du formulaire, lancer la fonction principale
 uiSend.onclick = function(event){
+    console.log("<< uiSend.onclick");
     event.preventDefault(); // Empêche le boutton de rafraîchir la page
     if (leftTry == 0) {
         gameOver();
     } else {
-        uiPrompt.focus(); // Forcer le curseur à aller dans le input
         guessLetter(); // Go dans la boucle
     }
 };
 // Le bouton reset
 uiRestart.onclick = function(event){
+    console.log("<< uiRestart.onclick");
     event.preventDefault();
     reset();
 };
 
 // Faut pas oublier de faire tourner la routourne en lançant la fonction principale ! :D 
-if (init == false) {
-    initialize();
-    init = true;
-}
+initialize();
