@@ -4,9 +4,10 @@ let Character = {
     "life":300,
     "atk":12,
     "def":13,
-    "agil":25,
-    "items_to_give":["MacBook","Thermos","Baffle","Enseignement","Aide"]
+    "agil":25
 }
+
+let items_to_give = ["MacBook","Thermos","Baffle","Enseignement","Aide"]
 
 let opponentCharacter= {};
 for (let i in Character) {
@@ -30,11 +31,11 @@ gun.name="Pistolet";
 gun.damage=2.6;
 
 function giveItem() {
-    var i = Math.floor(Math.random() * Character.items_to_give.length);
+    var i = Math.floor(Math.random() * items_to_give.length);
     console.log(i);
     
-    console.log(Character.name+" vous donne son "+(Character.items_to_give[i]).toLowerCase());
-    document.write("<br/>"+Character.name+" vous donne son "+Character.items_to_give[i]+"<br/>");
+    console.log(Character.name+" vous donne son "+(items_to_give[i]).toLowerCase());
+    document.write("<br/>"+Character.name+" vous donne son "+items_to_give[i]+"<br/>");
 }
 
 function attack(source,cible,arme) {
