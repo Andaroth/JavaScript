@@ -15,13 +15,11 @@ function loadJason(toLoad, callback) {
     loadData.send(null);
     console.log("loadData : " + loadData);
 }
-function sort() {
-    
-}
 
 // Fonction init(), main(), start(), begin()
 function initialize() {
-    console.log("> initialize();")
+    console.log("> initialize();");
+    // Je créé deux globales dans init car je sais que j'en aurai sûrement besoin tout au long de ma fonction
     var actualJSON = [];
     var peopleList = [];
     // Le fichier cible
@@ -41,7 +39,7 @@ function initialize() {
             actualJSON[i].score = randScore;
             document.write("<br/>" + actualJSON[i].name + " : " + actualJSON[i].score);
             console.log("randScore : " + actualJSON[i].score);
-        }  
+        } // fin score random
         // Tri par ordre croissant sur "score"
         actualJSON.sort(function(a, b) {
             return a.score - b.score;
@@ -51,31 +49,55 @@ function initialize() {
         console.log("peopleList : \n" + peopleList);
         document.write("<h2>peopleList (after score)</h2>" + peopleList);
         document.write("<h2>Arrays</h2>");
+        
+        // Je créé les trois catégories
         var arrayA = []; // > 750
         var arrayB = []; // > 500
         var arrayC = []; // < 500
         for (let i in actualJSON) {
+            // Je transforme les valeurs de mon objet en Number et en String pour pouvoir les exploiter
             var score = Number(actualJSON[i].score);
-            var name = JSON.stringify(actualJSON[i].name);
+            var people = JSON.stringify(actualJSON[i]);
             if (score <= 500) {
-                arrayC.push(name);
+                // PUSH !! :D (ajouter dans le tableau)
+                arrayC.push(people);
             }
             else if (score > 500 && score < 750) {
-                arrayB.push(name);
+                arrayB.push(people);
             }
             else {
-                arrayA.push(name);
+                arrayA.push(people);
             }
-        }
+        } // fin Tri catégories
+        
         document.write("A : " + arrayA);
         document.write("<br/>B : " + arrayB);
         document.write("<br/>C : " + arrayC);
+        var fromBahrain = [];
+        for (let i in actualJSON) {
+            var where = JSON.stringify(actualJSON[i].country);
+            var people = JSON.stringify(actualJSON[i]);
+            // La string where va littéralement prendre les guillemets, je dois adapter mon if à cela
+            if (where == '"Bahrain"') {
+                fromBahrain.push(people);
+            }
+        }
+        console.log("> fromBahrain = " + fromBahrain);
+        var howMuch = fromBahrain.length;
+        document.write("<h2>How much from Bahrain</h2>" + howMuch);
+        
+        var listScore = [];
+        // Entrer les scores dans un tableau
+        for (let i in actualJSON) {
+            var score = Number(actualJSON[i].score);
+            listScore.push(score);
+        }
+        console.log("listScore : \n" + listScore);
+        // Les "..." servent à indiquer à Math.min/max qu'on travaille dans un tableau
+        var lowestScore = Math.min(...listScore);
+        var highestScore = Math.max(...listScore);
+        console.log("low : " + lowestScore + "\nhigh : " + highestScore);
     }); // fin loadJason
 } // fin initialize()
 
 initialize(); // Démarrage
-
-
-
-
-
