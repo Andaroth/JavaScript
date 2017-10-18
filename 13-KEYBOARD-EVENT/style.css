@@ -1,0 +1,10 @@
+div {
+    width: 150px;
+    display: block;
+    margin: 25px auto;
+    background-color: lightblue;
+    padding: 15px;
+}
+.highlight {
+    opacity: .5;
+}

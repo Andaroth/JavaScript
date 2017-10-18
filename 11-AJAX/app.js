@@ -84,12 +84,13 @@ function initialize() {
         }
         console.log("> fromBahrain = " + fromBahrain);
         var howMuch = fromBahrain.length;
+        console.log("How much from Bahrain : " + howMuch);
         document.write("<h2>How much from Bahrain</h2>" + howMuch);
-        
+        // Afficher les score max et min
         var listScore = [];
         // Entrer les scores dans un tableau
         for (let i in actualJSON) {
-            var score = Number(actualJSON[i].score);
+            var score = actualJSON[i].score;
             listScore.push(score);
         }
         console.log("listScore : \n" + listScore);
