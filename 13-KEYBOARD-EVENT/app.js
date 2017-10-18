@@ -1,5 +1,5 @@
 function initialize() {
-    var randColorTable = ["red","green","blue","pink","lightgreen","skyblue","slateblue","purple","orange"];
+    var randColorTable = ["red","green","blue","pink","lightgreen","skyblue","slateblue","purple","orange","indigo"];
     var up = document.getElementById("up");
     var down = document.getElementById("down");
     var left = document.getElementById("left");
@@ -11,6 +11,7 @@ function initialize() {
     }
     document.addEventListener("keydown", (e) => {
         var inPut = event.key;
+        inPut = String(inPut);
         console.log("<< " + inPut);
         if ( (inPut == "ArrowUp") || (inPut == "ArrowDown") || (inPut == "ArrowLeft") || (inPut == "ArrowRight") ) {
             up.style.backgroundColor = randColor();
@@ -23,18 +24,18 @@ function initialize() {
             right.classList.add("highlight");
         }
         switch (inPut) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-                characTerre.backgroundColor = randColor();
-                console.log("case");
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9":
+                characTerre.style.backgroundColor = randColorTable[inPut];
+                console.log("GET " + inPut + " in switch");
                 break;
         } // switch
     }); // onkeydown end
