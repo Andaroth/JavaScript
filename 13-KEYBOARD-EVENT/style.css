@@ -4,6 +4,7 @@ div {
     margin: 25px auto;
     background-color: lightblue;
     padding: 15px;
+    transition: all .2s ease;
 }
 .highlight {
     opacity: .5;

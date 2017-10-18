@@ -35,7 +35,6 @@ function initialize() {
             case "8":
             case "9":
                 characTerre.style.backgroundColor = randColorTable[inPut];
-                console.log("GET " + inPut + " in switch");
                 break;
         } // switch
     }); // onkeydown end
