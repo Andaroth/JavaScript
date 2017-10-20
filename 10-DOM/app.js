@@ -49,7 +49,10 @@ newLi.innerHTML = "Mon meilleur ami est <a href=\"http://google.com/\" target=\"
 parent.appendChild(newLi);
 
 
-/*target = parent.children;
+// 4 bis 
+parent = document.querySelector("ol")
+target = parent.querySelectorAll("li");
 for (i=0;i<target.length;i++) {
-    parent.removeChild("li");
-}*/
+    console.log(target[i]);
+    target[i].remove();
+}
