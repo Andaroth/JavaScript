@@ -10,7 +10,7 @@ function initialize() {
         return randColorTable[thisRand];
     }
     document.addEventListener("keydown", (e) => {
-        var inPut = event.key;
+        var inPut = e.key;
         inPut = String(inPut);
         console.log("<< " + inPut);
         if ( (inPut == "ArrowUp") || (inPut == "ArrowDown") || (inPut == "ArrowLeft") || (inPut == "ArrowRight") ) {
