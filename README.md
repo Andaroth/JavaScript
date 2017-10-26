@@ -5,4 +5,8 @@ Vous pouvez trouver toutes les sources des exos sur le repo et aussi tester les 
 
 [http://Andaroth.github.io/JavaScript](http://Andaroth.github.io/JavaScript)/{le dossier que tu cherche}
 
+<<<<<<< HEAD
 COnflit 1
+=======
+Test conflit
+>>>>>>> dom-visible
