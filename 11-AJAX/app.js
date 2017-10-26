@@ -54,10 +54,10 @@ function initialize() {
         var arrayA = []; // > 750
         var arrayB = []; // > 500
         var arrayC = []; // < 500
-        for (let i in actualJSON) {
+        var mapper = actualJSON.map(function(index) {
             // Je transforme les valeurs de mon objet en Number et en String pour pouvoir les exploiter
-            var score = Number(actualJSON[i].score);
-            var people = JSON.stringify(actualJSON[i]);
+            var score = Number(index.score);
+            var people = JSON.stringify(index);
             if (score <= 500) {
                 // PUSH !! :D (ajouter dans le tableau)
                 arrayC.push(people);
@@ -68,7 +68,7 @@ function initialize() {
             else {
                 arrayA.push(people);
             }
-        } // fin Tri catégories
+        }); // fin Tri catégories
         
         document.write("A : " + arrayA);
         document.write("<br/>B : " + arrayB);
